@@ -1,9 +1,14 @@
 import express from "express";
-import { inventoryPage, supplyDepotPage } from "./pages/index.js";
+import {
+  inventoryPage,
+  supplyDepotPage,
+  packageProducts,
+} from "./pages/index.js";
 import {
   productsRouter,
   packagingsRouter,
   carriersRouter,
+  packagedProductRouter,
 } from "./routes/index.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -23,10 +28,14 @@ app
 app
   .use("/products", productsRouter)
   .use("/packagings", packagingsRouter)
-  .use("/carriers", carriersRouter);
+  .use("/carriers", carriersRouter)
+  .use("/packaged-products", packagedProductRouter);
 
 // Pages
-app.use("/", inventoryPage).use("/supply-depot", supplyDepotPage);
+app
+  .use("/", inventoryPage)
+  .use("/supply-depot", supplyDepotPage)
+  .use("/package-products", packageProducts);
 
 const port = process.env.PORT || 8888;
 app.listen(port, () => {

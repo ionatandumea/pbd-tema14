@@ -1,0 +1,26 @@
+html
+  head
+    title= "Package Products"
+    link(rel="stylesheet" href="/css/styles.css")
+  body
+    include nav.pug 
+    if packagedProducts.length
+      table(border="1")
+        thead
+          tr
+            th ID
+            th ProductID
+            th Product Name
+            th PackagingID
+            th Packaging Type
+        tbody
+          each packagedProduct in packagedProducts
+            tr
+              td= packagedProduct.id
+              td= packagedProduct.productID
+              td= packagedProduct.product.name
+              td= packagedProduct.packagingID
+              td= packagedProduct.packaging.type
+      p Total packaged products: #{packagedProducts.length}
+    else
+      p No packaged products available.
