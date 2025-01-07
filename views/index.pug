@@ -1,0 +1,75 @@
+html
+  head
+    title= Inventory
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+    script.
+      function sortTable(column, asc = true) {
+        const table = document.querySelector("#carriersTable tbody");
+        const rows = Array.from(table.querySelectorAll("tr"));
+        rows.sort((a, b) => {
+          const aValue = parseInt(a.children[column].textContent.trim(), 10);
+          const bValue = parseInt(b.children[column].textContent.trim(), 10);
+          return asc ? aValue - bValue : bValue - aValue;
+        });
+        rows.forEach(row => table.appendChild(row));
+      }
+  body
+    include nav.pug 
+    h1 Inventory
+    h2 Products
+    if products.length
+      table(border="1")
+        thead
+          tr
+            th ID
+            th Name
+            th Quantity
+        tbody
+          each product in products
+            tr
+              td= product.id
+              td= product.name
+              td= product.quantity
+      p Total products: #{products.length}
+    else
+      p No products available.
+    h2 Packagings
+    if packagings.length
+      table(border="1")
+        thead
+          tr
+            th ID
+            th Type
+            th Quantity
+        tbody
+          each packaging in packagings
+            tr
+              td= packaging.id
+              td= packaging.type
+              td= packaging.quantity
+      p Total packagings: #{packagings.length}
+    else
+      p No packagings available.
+    h2 Carriers
+    if carriers.length
+      table(id="carriersTable" border="1")
+        thead
+          tr
+            th ID
+            th Type
+            th License Plate
+            th 
+              | Max Packagings 
+              button(onclick="sortTable(3, true)") ↑
+              button(onclick="sortTable(3, false)") ↓
+        tbody
+          each carrier in carriers
+            tr
+              td= carrier.id
+              td= carrier.type
+              td= carrier.licensePlate
+              td= carrier.maxPackagings
+      p Total carriers: #{carriers.length}
+    else
+      p No carriers available.
+

@@ -1,0 +1,99 @@
+html
+  head
+    title= "Supply Depot"
+    script(type="module" src="/js/addItem.js")
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      #formsWrapper {
+          display: flex;
+          gap: 50px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 300px;
+      }
+      label {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+      input {
+        margin-top: 5px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      button {
+        margin-top: 10px;
+        padding: 8px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      table {
+        margin-top: 20px;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+  body
+    include nav.pug
+    h1 Supply Depot Management
+
+    div#formsWrapper 
+      div
+        h2 Add New Product
+        form(id="productForm")
+          label(for="productName") Name: 
+          input(type="text" name="name" required)
+          label(for="productQuantity") Quantity: 
+          input(type="number" name="quantity" required)
+          button(type="button" onclick="addItem('product')") Add Product
+
+      div
+        h2 Add New Packaging
+        form(id="packagingForm")
+          label(for="packagingType") Type: 
+          select(name="type" required)
+            option(value="CARDBOARD_BOX") CARDBOARD BOX
+            option(value="CONTAINER") CONTAINER
+            option(value="PALLET") PALLET
+          label(for="packagingQuantity") Quantity: 
+          input(type="number" name="quantity" required)
+          button(type="button" onclick="addItem('packaging')") Add Packaging
+
+      div
+        h2 Add New Carrier
+        form(id="carrierForm")
+          label(for="carrierType") Type: 
+          select(name="type" required)
+            option(value="TRAIN") TRAIN
+            option(value="FERRY") FERRY
+            option(value="VAN") VAN
+            option(value="TRUCK") TRUCK
+            option(value="AIRPLANE") AIRPLANE
+          label(for="carrierLicensePlate") License Plate: 
+          input(type="text" name="licensePlate" required)
+          label(for="carrierMaxPackagings") Max Packagings:
+          input(type="number" name="maxPackagings" required)
+          button(type="button" onclick="addItem('carrier')") Add Carrier
+

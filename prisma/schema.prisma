@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Product Model
+model Product {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  quantity        Int
+  packagedProduct PackagedProduct[]
+}
+
+// Packaging Model
+enum PackagingType {
+  CARDBOARD_BOX
+  CONTAINER
+  PALLET
+}
+
+model Packaging {
+  id              Int               @id @default(autoincrement())
+  type            PackagingType     @unique
+  quantity        Int
+  packagedProduct PackagedProduct[]
+}
+
+// Carrier Model
+enum CarrierType {
+  TRAIN
+  FERRY
+  VAN
+  TRUCK
+  AIRPLANE
+}
+
+model Carrier {
+  id               Int                @id @default(autoincrement())
+  type             CarrierType
+  licensePlate     String             @unique @db.VarChar(255)
+  maxPackagings    Int
+  plannedTransport PlannedTransport[]
+}
+
+// Planned Transport Model
+model PlannedTransport {
+  id        Int        @id @default(autoincrement())
+  carrier   Carrier    @relation(fields: [carrierId], references: [id])
+  carrierId Int
+  dates     DateTime[]
+}
+
+// Packaged Product Model
+model PackagedProduct {
+  id          Int       @id @default(autoincrement())
+  product     Product   @relation(fields: [productId], references: [id])
+  packaging   Packaging @relation(fields: [packagingId], references: [id])
+  productId   Int
+  packagingId Int
+}
