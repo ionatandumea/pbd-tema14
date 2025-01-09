@@ -96,6 +96,38 @@ async function addItem(type) {
     } catch (error) {
       alert("An error occurred while adding the packaging.");
     }
+  } else if (type === "packagedProduct") {
+    const form = document.getElementById("packagedProductForm");
+
+    const packagedProduct = {
+      productId: form.elements["productId"].value,
+      packagingId: form.elements["packagingId"].value,
+    };
+
+    if (!packagedProduct.productId || !packagedProduct.packagingId) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/packaged-products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(packagedProduct),
+      });
+
+      if (response.ok) {
+        alert("Successfully packaged the product!");
+      } else {
+        alert("Error adding packaged product.");
+      }
+
+      form.reset();
+    } catch (error) {
+      alert("An error occurred while adding the packaged product.");
+    }
   }
 }
 

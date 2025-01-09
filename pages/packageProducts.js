@@ -4,9 +4,21 @@ import prisma from "../providers/prismaClient.js";
 const router = express.Router();
 
 router.get("/", async (_req, res) => {
-  const packagedProducts = await prisma.packagedProduct.findMany();
+  const packagedProducts = await prisma.packagedProduct.findMany({
+    include: {
+      product: true,
+      packaging: true,
+    },
+  });
 
-  res.render("packageProducts", { packagedProducts });
+  const productsList = await prisma.product.findMany();
+  const packagingsList = await prisma.packaging.findMany();
+
+  res.render("packageProducts", {
+    packagedProducts,
+    productsList,
+    packagingsList,
+  });
 });
 
 export default router;

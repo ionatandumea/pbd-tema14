@@ -54,17 +54,20 @@ model Carrier {
 
 // Planned Transport Model
 model PlannedTransport {
-  id        Int        @id @default(autoincrement())
-  carrier   Carrier    @relation(fields: [carrierId], references: [id])
-  carrierId Int
-  dates     DateTime[]
+  id              Int               @id @default(autoincrement())
+  carrier         Carrier           @relation(fields: [carrierId], references: [id])
+  carrierId       Int
+  dates           DateTime[]
+  packagedProduct PackagedProduct[]
 }
 
 // Packaged Product Model
 model PackagedProduct {
-  id          Int       @id @default(autoincrement())
-  product     Product   @relation(fields: [productId], references: [id])
-  packaging   Packaging @relation(fields: [packagingId], references: [id])
-  productId   Int
-  packagingId Int
+  id                 Int              @id @default(autoincrement())
+  product            Product          @relation(fields: [productId], references: [id])
+  packaging          Packaging        @relation(fields: [packagingId], references: [id])
+  productId          Int
+  packagingId        Int
+  plannedTransportId Int?
+  plannedTransport   PlannedTransport? @relation(fields: [plannedTransportId], references: [id])
 }

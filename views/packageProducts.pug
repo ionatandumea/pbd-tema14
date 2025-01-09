@@ -1,25 +1,38 @@
 html
   head
     title= "Package Products"
+    script(type="module" src="/js/addItem.js")
     link(rel="stylesheet" href="/css/styles.css")
   body
     include nav.pug 
+    h1 Package Products
+
+    div#formsWrapper
+      div
+        h2 Add New Packaged Product
+        form(id="packagedProductForm")
+          label(for="productType") Product:
+          select(name="productId" required)
+            each product in productsList
+              option(value=product.id) #{product.name}
+          label(for="packagingType") Packaging:
+          select(name="packagingId" required)
+            each packaging in packagingsList
+              option(value=packaging.id) #{packaging.type}
+          button(type="button" onclick="addItem('packagedProduct')") Package Product
+
     if packagedProducts.length
       table(border="1")
         thead
           tr
             th ID
-            th ProductID
             th Product Name
-            th PackagingID
             th Packaging Type
         tbody
           each packagedProduct in packagedProducts
             tr
               td= packagedProduct.id
-              td= packagedProduct.productID
               td= packagedProduct.product.name
-              td= packagedProduct.packagingID
               td= packagedProduct.packaging.type
       p Total packaged products: #{packagedProducts.length}
     else

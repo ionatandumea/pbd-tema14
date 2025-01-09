@@ -17,10 +17,27 @@ export const findOne = async (req, res) => {
 export const create = async (req, res) => {
   const body = req.body;
 
+  const productId = parseInt(body.productId);
+  const packagingId = parseInt(body.packagingId);
+
+  await prisma.product.update({
+    where: { id: productId },
+    data: { quantity: { decrement: 1 } },
+  });
+
+  await prisma.packaging.update({
+    where: { id: packagingId },
+    data: { quantity: { decrement: 1 } },
+  });
+
   const packagedProduct = await prisma.packagedProduct.create({
     data: {
-      productId: body.productId,
-      packagingId: body.packagingId,
+      product: {
+        connect: { id: productId },
+      },
+      packaging: {
+        connect: { id: packagingId },
+      },
     },
   });
 
