@@ -3,6 +3,7 @@ import {
   inventoryPage,
   supplyDepotPage,
   packageProducts,
+  planTransportsPage,
 } from "./pages/index.js";
 import {
   productsRouter,
@@ -35,7 +36,8 @@ app
 app
   .use("/", inventoryPage)
   .use("/supply-depot", supplyDepotPage)
-  .use("/package-products", packageProducts);
+  .use("/package-products", packageProducts)
+  .use("/plan-transports", planTransportsPage);
 
 const port = process.env.PORT || 8888;
 app.listen(port, () => {
