@@ -5,11 +5,11 @@ html
     link(rel="stylesheet" href="/css/styles.css")
   body
     include nav.pug
-    h1 Supply Depot Management
+    h2 Supply Depot Management
 
     div#formsWrapper 
       div
-        h2 Add New Product
+        h3 Add New Product
         form(id="productForm")
           label(for="productName") Name: 
           input(type="text" name="name" required)
@@ -18,7 +18,7 @@ html
           button(type="button" onclick="addItem('product')") Add Product
 
       div
-        h2 Add New Packaging
+        h3 Add New Packaging
         form(id="packagingForm")
           label(for="packagingType") Type: 
           select(name="type" required)
@@ -30,7 +30,7 @@ html
           button(type="button" onclick="addItem('packaging')") Add Packaging
 
       div
-        h2 Add New Carrier
+        h3 Add New Carrier
         form(id="carrierForm")
           label(for="carrierType") Type: 
           select(name="type" required)
@@ -44,4 +44,3 @@ html
           label(for="carrierMaxPackagings") Max Packagings:
           input(type="number" name="maxPackagings" required)
           button(type="button" onclick="addItem('carrier')") Add Carrier
-

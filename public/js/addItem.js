@@ -128,6 +128,41 @@ async function addItem(type) {
     } catch (error) {
       alert("An error occurred while adding the packaged product.");
     }
+  } else if (type === "planTransport") {
+    const form = document.getElementById("planTransportForm");
+
+    const planTransport = {
+      start: form.elements["startDate"].value,
+      end: form.elements["endDate"].value,
+      packagedProducts: form.elements["packagedProducts"].value,
+    };
+
+    if (
+      !planTransport.start ||
+      !planTransport.end ||
+      !planTransport.packagedProducts
+    ) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/planned-transports", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(planTransport),
+      });
+
+      if (response.ok) {
+        alert("Successfully planned the new transport!");
+      } else {
+        throw new Error("Error planning transport.");
+      }
+    } catch (error) {
+      alert("An error occurred while planning the new transport.");
+    }
   }
 }
 

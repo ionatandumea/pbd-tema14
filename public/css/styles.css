@@ -1,70 +1,143 @@
-*, ::before, ::after {
+*,
+::before,
+::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+  font-family: "Roboto", Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 20px;
 }
 
 h1 {
   text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #444;
 }
 
 #formsWrapper {
   display: flex;
-  gap: 50px;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 300px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+form:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 label {
-  margin-top: 10px;
-  font-weight: bold;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
 }
 
 input {
-  margin-top: 5px;
-  padding: 5px;
+  margin-top: 8px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  outline: none;
 }
 
 button {
-  margin-top: 10px;
-  padding: 8px;
+  margin-top: 20px;
+  padding: 10px 15px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
 }
 
 button:hover {
   background-color: #0056b3;
+  transform: scale(1.02);
 }
 
 table {
-  margin-top: 20px;
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 th,
 td {
-  border: 1px solid #ccc;
-  padding: 8px;
+  padding: 12px 15px;
   text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.95rem;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #007bff;
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+th > button {
+  margin: 0;
+  padding: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+td {
+  color: #555;
+}
+
+tr:hover td {
+  background-color: #f1f7ff;
+}
+
+@media (max-width: 768px) {
+  #formsWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  form {
+    width: 90%;
+  }
 }

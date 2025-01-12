@@ -10,6 +10,7 @@ import {
   packagingsRouter,
   carriersRouter,
   packagedProductRouter,
+  plannedTransportsRouter,
 } from "./routes/index.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -30,7 +31,8 @@ app
   .use("/products", productsRouter)
   .use("/packagings", packagingsRouter)
   .use("/carriers", carriersRouter)
-  .use("/packaged-products", packagedProductRouter);
+  .use("/packaged-products", packagedProductRouter)
+  .use("/planned-transports", plannedTransportsRouter);
 
 // Pages
 app

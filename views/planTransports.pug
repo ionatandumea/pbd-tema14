@@ -5,4 +5,18 @@ html
     link(rel="stylesheet" href="/css/styles.css")
   body
     include nav.pug
-    h1 Plan Transports
+    h2 Plan Transports
+
+    div#formsWrapper 
+      div
+        h3 Plan A New Transport 
+        form(id="planTransportForm")
+          label(for="startDate") Start Date:
+          input(type="date" name="startDate" required)
+          label(for="endDate") End Date:
+          input(type="date" name="endDate" required)
+          label(for="packagedProduct") Choose packaged products:
+          select(id="packagedProduct" name="packagedProducts" required multiple style="max-height: 200px; overflow-y: auto;")
+            each packagedProduct in packagedProducts
+              option(value=packagedProduct.id) #{packagedProduct.product.name} - #{packagedProduct.packaging.type}
+          button(type="button" onclick="addItem('planTransport')") Plan Transport 
